@@ -1,7 +1,7 @@
 const qrcode = require("qrcode-terminal");
 const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
 
-let messageContent=[
+let messageContent = [
   "Hello,Thank you for your message. Owner is currently unavailable, I am Athena virtual assistant of Manaf and am here to help with any questions or concerns you may have. Please let me know how I can assist you and I will do my best to help.",
   "Thank you for reaching out! Owner is currently unavailable, but I am happy to assist you in any way that I can. How may I help you today?",
   "Hello and thank you for reaching out! Owner is currently unavailable, but I am here to assist you in any way that I can. Please let me know if you have any questions or need assistance with anything. I will do my best to help or pass along your message to the owner as soon as possible. Thank you for your understanding.",
@@ -32,11 +32,11 @@ client.on("ready", () => {
   console.log("Bot is ready!");
 });
 
-client.on("message",(message) => {
-  
+client.on("message", (message) => {
+
   let content = messageContent[Math.floor(Math.random() * messageContent.length)];
-  if(message.body || message.hasMedia){
-    message.reply(message.from,content)
+  if (message.body || message.hasMedia) {
+    message.reply(message.from, content)
   }
 
 });
