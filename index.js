@@ -5,9 +5,9 @@ let messageContent = [
   "Hello and welcome! I am the Owner's virtual assistant - Athena(AI using CHATGPT), and I am here to help with any questions or needs you may have. The owner is currently unavailable, but I will do my best to assist you in the meantime. Please let me know if there is anything I can help with. Thank you for your message.",
   "Hello! Thank you for reaching out. It's great to meet you. I'm Athena(AI using CHATGPT), virtual assistant of Owner, and I'm here to help with any questions or concerns you may have. Is there anything specific you'd like to chat about today? I'm all ears!",
   "Hello and welcome! Thank you for your message. I am Athena(AI using CHATGPT), virtual assistant of Owner here to help with any questions or concerns you may have. Please let me know how I can assist you. I look forward to chatting with you.",
-  "CHATGPT is Active",
+  "CHAT BOT is Active",
   "Bot is on TEST...",
-  "Jarvis Activated",
+  "BOT Activated",
   "Web Console Ready for automatic bot reply"
 ]
 
