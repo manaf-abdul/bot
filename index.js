@@ -35,7 +35,7 @@ client.on("ready", () => {
 client.on("message",(message) => {
   let content = messageContent[Math.floor(Math.random() * messageContent.length)];
   if(message.body || message.hasMedia){
-    message.reply(content)
+    message.reply(message.from,content)
   }
 
 });
