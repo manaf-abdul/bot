@@ -30,11 +30,9 @@ client.on("ready", () => {
   console.log("Bot is ready!");
 });
 
-client.on("message", async(message) => {
+client.on("message",(message) => {
 
   if(message.body || message.hasMedia){
-    let user=await message.author
-    console.log("user",user);
     message.reply(messageContent[6])
   }
 
