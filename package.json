@@ -13,7 +13,6 @@
   "author": "Amos Ayomide (amosayomide05)",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "latest",
     "qrcode-terminal": "latest",
     "whatsapp-web.js": "latest"
   },

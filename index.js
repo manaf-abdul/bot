@@ -1,6 +1,3 @@
-const qrcode = require("qrcode-terminal");
-const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
-
 let messageContent = [
   "Hello,Thank you for your message. Owner is currently unavailable, I am Athena(AI using CHATGPT) virtual assistant and am here to help with any questions or concerns you may have. Please let me know how I can assist you and I will do my best to help.",
   "Thank you for reaching out! Owner is currently unavailable, but I am happy to assist you in any way that I can. How may I help you today?",
@@ -14,29 +11,25 @@ let messageContent = [
   "Web Console Ready for automatic bot reply"
 ]
 
-const client = new Client({
-  puppeteer: {
-    executablePath: '/usr/bin/google-chrome-stable',
-  },
-  authStrategy: new LocalAuth()
+const qrcode = require('qrcode-terminal');
+
+const { Client } = require('whatsapp-web.js');
+const client = new Client();
+
+client.on('qr', qr => {
+  qrcode.generate(qr, { small: true });
+});
+
+client.on('ready', () => {
+  console.log('Client is ready!');
+});
+
+client.on('message', message => {
+  console.log("message", message.author);
+  let content = messageContent[Math.floor(Math.random() * messageContent.length)];
+  if ((message.body || message.hasMedia) && message.author === undefined) {
+    client.sendMessage(message.from, content);
+  }
 });
 
 client.initialize();
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-});
-client.on("authenticated", () => {
-  console.log("Auth Completed!");
-});
-client.on("ready", () => {
-  console.log("Bot is ready!");
-});
-
-client.on("message", (message) => {
-
-  let content = messageContent[Math.floor(Math.random() * messageContent.length)];
-  if (message.body || message.hasMedia) {
-    message.reply(message.from, content)
-  }
-
-});
