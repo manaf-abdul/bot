@@ -1,0 +1,30 @@
+{
+  "name": "ChatGPT and Whatsapp bot",
+  "version": "1.0.0",
+  "description": "ChatGPT and Whatsapp bot, based on Node.js by amosayomide05",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Amos Ayomide (amosayomide05)",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "latest",
+    "qrcode-terminal": "latest",
+    "whatsapp-web.js": "latest",
+    "chatgpt": "latest"
+  },
+  "homepage": "https://github.com/amosayomide05/chatgpt-whatsapp-bot",
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amosayomide05/chatgpt-whatsapp-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amosayomide05/chatgpt-whatsapp-bot/issues"
+  }
+}

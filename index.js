@@ -1,0 +1,41 @@
+const qrcode = require("qrcode-terminal");
+const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
+
+let messageContent=[
+  "Hello,Thank you for your message. Manaf is currently unavailable, I am Athena virtual assistant of Manaf and am here to help with any questions or concerns you may have. Please let me know how I can assist you and I will do my best to help.",
+  "Thank you for reaching out! Manaf is currently unavailable, but I am happy to assist you in any way that I can. How may I help you today?",
+  "Hello and thank you for reaching out! Manaf is currently unavailable, but I am here to assist you in any way that I can. Please let me know if you have any questions or need assistance with anything. I will do my best to help or pass along your message to the owner as soon as possible. Thank you for your understanding.",
+  "Hello and welcome! I am the Manaf's virtual assistant - Athena, and I am here to help with any questions or needs you may have. The owner is currently unavailable, but I will do my best to assist you in the meantime. Please let me know if there is anything I can help with. Thank you for your message.",
+  "Hello! Thank you for reaching out. It's great to meet you. I'm Athena, virtual assistant of Manaf, and I'm here to help with any questions or concerns you may have. Is there anything specific you'd like to chat about today? I'm all ears!",
+  "Hello and welcome! Thank you for your message. I am Athena, virtual assistant of Manaf here to help with any questions or concerns you may have. Please let me know how I can assist you. I look forward to chatting with you.",
+  "Hello and welcome! I'm glad you reached out. Manaf is currently unavailable, Iam Athena and I'm here to assist you with any questions or concerns you may have. Is there anything specific I can help with today? I'm here to make your experience as enjoyable as possible, so please don't hesitate to ask."
+]
+
+
+const client = new Client({
+  puppeteer: {
+    executablePath: '/usr/bin/google-chrome',
+  },
+  authStrategy: new LocalAuth()
+});
+
+client.initialize();
+client.on("qr", (qr) => {
+  qrcode.generate(qr, { small: true });
+});
+client.on("authenticated", () => {
+  console.log("Auth Completed!");
+});
+client.on("ready", () => {
+  console.log("Bot is ready!");
+});
+
+client.on("message", async(message) => {
+
+  if(message.body || message.hasMedia){
+    let user=await message.author
+    console.log("user",user);
+    message.reply(messageContent[6])
+  }
+
+});
