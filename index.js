@@ -35,4 +35,8 @@ client.on('message', message => {
   }
 });
 
+setInterval(()=> {
+  recentContacts = [];
+},900000)
+
 client.initialize();
