@@ -14,6 +14,7 @@ let messageContent = [
 let recentContacts=[]
 
 const qrcode = require('qrcode-terminal');
+const axios=require("axios")
 
 const { Client } = require('whatsapp-web.js');
 const client = new Client();
@@ -26,17 +27,20 @@ client.on('ready', () => {
   console.log('Client is ready!');
 });
 
-client.on('message', message => {
+client.on('message', async(message) => {
   console.log("message", message.author);
-  let content = `Hi ${message._data.notifyName}, Manaf is currently busy please leave a message`
-  if ((message.body || message.hasMedia) && message.author === undefined && !recentContacts.includes(message._data.notifyName) && message._data.notifyName) {
-    client.sendMessage(message.from, content);
-    recentContacts.push(message._data.notifyName)
+  // let content = `Hi ${message._data.notifyName}, Manaf is currently busy please leave a message`
+  
+  let {data}=await axios.get(`http://api.brainshop.ai/get?bid=171235&key=nAosRWktWiU5Hon1&uid=[uid]&msg=[${message.body}]`)
+
+  if ((message.body || message.hasMedia) && message.author === undefined && message._data.notifyName) {
+    client.sendMessage(message.from, data.cnt);
+    // recentContacts.push(message._data.notifyName)
   }
 });
 
-setInterval(()=> {
-  recentContacts = [];
-},900000)
+// setInterval(()=> {
+//   recentContacts = [];
+// },900000)
 
 client.initialize();
