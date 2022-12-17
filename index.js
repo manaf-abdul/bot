@@ -11,6 +11,8 @@ let messageContent = [
   "Web Console Ready for automatic bot reply"
 ]
 
+let recentContacts=[]
+
 const qrcode = require('qrcode-terminal');
 
 const { Client } = require('whatsapp-web.js');
@@ -26,9 +28,10 @@ client.on('ready', () => {
 
 client.on('message', message => {
   console.log("message", message.author);
-  let content = messageContent[Math.floor(Math.random() * messageContent.length)];
-  if ((message.body || message.hasMedia) && message.author === undefined) {
+  let content = `Hi ${message._data.notifyName}, Manaf is currently busy please leave a message`
+  if ((message.body || message.hasMedia) && message.author === undefined && !recentContacts.includes(message._data.notifyName) && message._data.notifyName) {
     client.sendMessage(message.from, content);
+    recentContacts.push(message._data.notifyName)
   }
 });
 
