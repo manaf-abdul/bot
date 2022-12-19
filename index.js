@@ -11,13 +11,22 @@ let messageContent = [
   "Web Console Ready for automatic bot reply"
 ]
 
-let recentContacts=[]
+let recentContacts = []
+
+// appikey="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"
 
 const qrcode = require('qrcode-terminal');
-const axios=require("axios")
+const axios = require("axios")
 
 const { Client } = require('whatsapp-web.js');
 const client = new Client();
+
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: "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",
+});
+const openai = new OpenAIApi(configuration);
 
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true });
@@ -27,14 +36,27 @@ client.on('ready', () => {
   console.log('Client is ready!');
 });
 
-client.on('message', async(message) => {
+client.on('message', async (message) => {
   console.log("message", message.author);
   // let content = `Hi ${message._data.notifyName}, Manaf is currently busy please leave a message`
-  
-  let {data}=await axios.get(`http://api.brainshop.ai/get?bid=171235&key=nAosRWktWiU5Hon1&uid=[uid]&msg=[${message.body}]`)
+
+  // let {data}=await axios.get(`http://api.brainshop.ai/get?bid=171235&key=nAosRWktWiU5Hon1&uid=[uid]&msg=[${message.body}]`)
 
   if ((message.body || message.hasMedia) && message.author === undefined && message._data.notifyName) {
-    client.sendMessage(message.from, data.cnt);
+    const { data } = await openai.createCompletion({
+      model: "text-ada-001",
+      prompt:message.body,
+      temperature: 0.9,
+      max_tokens: 150,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0.6,
+      stop: [" Human:", " AI:"],
+    });
+
+    console.log("response", data)
+
+    client.sendMessage(message.from, data.choices[0].text);
     // recentContacts.push(message._data.notifyName)
   }
 });
